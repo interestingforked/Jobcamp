@@ -7,7 +7,7 @@ class m110123_170042_create_candidate_table extends CDbMigration
 		$this->createTable('candidate', array(
 			'id' => 'pk',
 			'username' => 'varchar(15) NOT NULL',
-			'password' => 'varchar(40) NOT NULL',
+			'password_hash' => 'varchar(40) NOT NULL',
 			'email' => 'varchar(100) NOT NULL',
 			'first_name' => 'varchar(100) NOT NULL',
 			'last_name' => 'varchar(100) NOT NULL',
@@ -30,6 +30,7 @@ class m110123_170042_create_candidate_table extends CDbMigration
 			'total_experience_y' => 'int(3) NOT NULL',
 			'contact_settings' => 'int(1) NOT NULL',
 			'profile_settings' => 'int(1) NOT NULL',
+			'activation_code' => 'varchar(40) NOT NULL',
 			'status' => 'int(1) NOT NULL',
 			'created_at' => 'datetime NOT NULL',
 			'updated_at' => 'datetime NOT NULL',

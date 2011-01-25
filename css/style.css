@@ -1,0 +1,100 @@
+body {
+	background: none repeat scroll 0 0 #EEEEEE;
+	font-size: 14px;
+	font-family: verdana,helvetica,arial,sans-serif;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0.8px;
+}
+
+#header {
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#sitename {
+	font-size:25px;
+	color:#2B547E;
+	padding: 15px 0 15px 10px;
+}
+
+#navigation {
+	color:#000000;
+	padding: 7px 10px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#top-menu {
+	background: none repeat scroll 0 0 #2B547E;
+	height:35px;
+}
+
+#top-menu ul {
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+
+#top-menu ul li {
+	font-size:14px;
+	background: none repeat scroll 0 0 #2B547E;
+	padding: 8px 10px 8px 10px;
+	float:left;
+	border-right: 1px solid #EEEEEE;
+}
+
+#top-menu ul li a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+#breadcrumb {
+	font-size:12px;
+	padding: 7px 20px 7px 20px;
+}
+
+#left-layout {
+	background-color: #FFFFFF;
+	padding:10px;
+}
+
+#page-error, #page-success {
+	border: 1px solid;
+	padding: 10px 10px 10px 10px;
+	margin:10px;
+}
+
+#page-success {
+	color: #4F8A10;
+	background: none repeat scroll 0 0 #DFF2BF;
+}
+
+#page-error {
+	color: #D8000C;
+	background: none repeat scroll 0 0 #FFBABA;
+}
+
+#page-header {
+	font-size:15px;
+	font-weight:bold;
+	padding: 10px 10px 10px 10px;
+}
+
+#page-content {
+	padding: 10px 10px 10px 10px;
+}
+
+#right-layout {
+	background: none repeat scroll 0 0 #F7F3E8;
+	padding:10px;
+}
+
+#footer {
+	margin-top: 20px;
+	text-align: center;
+}
