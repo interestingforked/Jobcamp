@@ -3,5 +3,5 @@
 	$this->breadcrumbs=array('Login');
 ?>
 <div class="form">
-	<?php echo $form; ?>
+	<?php echo $form->render(); ?>
 </div>

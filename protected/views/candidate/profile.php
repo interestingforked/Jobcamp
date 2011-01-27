@@ -1,7 +1,14 @@
 <?php
 	$this->pageTitle = 'Candidate Profile';
-	$this->breadcrumbs=array('My Profile');
+	$this->breadcrumbs = array('Profile');
 ?>
+
+<div class="float-right">
+<?php
+	echo CHtml::link('Edit Profile', array('candidate/edit'));
+?>
+</div>
+
 <table id="profile-table">
 
 <tr>
@@ -31,7 +38,7 @@
 
 <tr>
 <td class="align-right">State:</td>
-<td<?php echo CHtml::encode($candidate->state_id); ?>></td>
+<td><?php echo CHtml::encode($candidate->state_id); ?></td>
 </tr>
 
 <tr>
@@ -65,18 +72,13 @@
 </tr>
 
 <tr>
-<td class="align-right">Age:</td>
-<td><?php echo CHtml::encode($candidate->age); ?></td>
-</tr>
-
-<tr>
 <td class="align-right">Gender:</td>
-<td><?php echo CHtml::encode($candidate->gender); ?></td>
+<td><?php echo CHtml::encode($candidate->genderText); ?></td>
 </tr>
 
 <tr>
-<td class="align-right">Maritial Status:</td>
-<td><?php echo CHtml::encode($candidate->maritial_status); ?></td>
+<td class="align-right">Marital Status:</td>
+<td><?php echo CHtml::encode($candidate->maritalStatusText); ?></td>
 </tr>
 
 <tr>
@@ -91,17 +93,17 @@
 
 <tr>
 <td class="align-right">Total Emperience:</td>
-<td><?php echo CHtml::encode($candidate->total_experience_m); ?> Years <?php echo CHtml::encode($candidate->total_experience_y); ?> Months</td>
-</tr>
-
-<tr>
-<td class="align-right">Contact Settings:
-<td><?php echo CHtml::encode($candidate->contact_settings); ?></td>
+<td><?php echo CHtml::encode($candidate->total_experience_y); ?> Years <?php echo CHtml::encode($candidate->total_experience_m); ?> Months</td>
 </tr>
 
 <tr>
 <td class="align-right">Profile Settings:
-<td><?php echo CHtml::encode($candidate->profile_settings); ?></td>
+<td><?php echo CHtml::encode($candidate->profileSettingsText); ?></td>
+</tr>
+
+<tr>
+<td class="align-right">Contact Settings:
+<td><?php echo CHtml::encode($candidate->contactSettingsText); ?></td>
 </tr>
 
 </table>

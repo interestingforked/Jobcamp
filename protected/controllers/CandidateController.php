@@ -71,6 +71,29 @@ class CandidateController extends Controller
 		$this->render('profile', array('candidate' => $model));
 	}
 
+	public function actionEdit()
+	{
+		$model = Candidate::model()->findByPk(Yii::app()->user->id);
+		$model->setScenario('edit');
+		$form = new CForm('application.views.candidate.editForm', $model);
+		if ($form->submitted('Candidate') && $form->validate()) {
+			$model->attributes = $_POST['Candidate'];
+			if ($model->update()) {
+				Yii::app()->user->setFlash('success', 'Your profile has been updated.');
+				$this->redirect(array('candidate/profile'));
+				return;
+			} else {
+				Yii::app()->user->setFlash('error', 'There was an error updating your profile. Please try again.');
+				$this->render('edit', array('form' => $form));
+				return;
+			}
+		} else {
+			$this->render('edit', array('form' => $form));
+			return;
+		}
+		$this->render('edit', array('form' => $form));
+	}
+
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

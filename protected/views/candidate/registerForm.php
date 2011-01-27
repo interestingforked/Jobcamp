@@ -2,7 +2,6 @@
 	$form_structure = array(
 		'elements' => array(
 			'username' => array(
-				'label' => 'Username',
 				'type' => 'text',
 				'maxlength' => 15,
 			),

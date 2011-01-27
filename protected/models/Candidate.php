@@ -20,9 +20,8 @@
  * @property string $contact_mobile
  * @property string $website
  * @property string $date_of_birth
- * @property integer $age
- * @property string $gender
- * @property integer $maritial_status
+ * @property integer $gender
+ * @property integer $marital_status
  * @property string $education_profile
  * @property string $work_profile
  * @property integer $total_experience_m
@@ -63,15 +62,30 @@ class Candidate extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('id, username, password_hash, email, activation_code, status, created_at, updated_at', 'unsafe', 'on' => 'edit'),
+
 			array('username', 'length', 'min' => 4, 'max' => 15),
 			array('password', 'length', 'max' => 40),
-			//array('email', 'email'),
+			array('email', 'email'),
 
 			array('username, password, email', 'required', 'on' => 'register'),
 			array('username, email', 'unique', 'on' => 'register'),
+
 			array('username, password', 'required', 'on' => 'login'),
-			//array('id, username, password, email, first_name, last_name, address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, website, date_of_birth, age, gender, maritial_status, education_profile, work_profile, total_experience_m, total_experience_y, contact_settings, profile_settings, status, created_at, updated_at', 'required'),
-			//array('id, city_id, state_id, country_id, pincode, age, maritial_status, total_experience_m, total_experience_y, contact_settings, profile_settings, status', 'numerical', 'integerOnly'=>true),
+
+			array('first_name, last_name', 'required', 'on' => 'edit'),
+			array('address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, education_profile, work_profile', 'safe', 'on' => 'edit'),
+			array('website', 'url', 'on' => 'edit'),
+			array('date_of_birth', 'type', 'type' => 'date', 'dateFormat' => 'yyyy-mm-dd', 'on' => 'edit'),
+			array('total_experience_m', 'in', 'range' => $this->getMonthOptions(), 'on' => 'edit'),
+			array('total_experience_y', 'in', 'range' => $this->getyearOptions(), 'on' => 'edit'),
+			array('gender', 'in', 'range' => array_keys($this->getGenderOptions()), 'on' => 'edit'),
+			array('marital_status', 'in', 'range' => array_keys($this->getMaritalStatusOptions()), 'on' => 'edit'),
+			array('profile_settings', 'in', 'range' => array_keys($this->getProfileSettingsOptions()), 'on' => 'edit'),
+			array('contact_settings', 'in', 'range' => array_keys($this->getContactSettingsOptions()), 'on' => 'edit'),
+
+			//array('id, username, password, email, first_name, last_name, address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, website, date_of_birth, gender, marital_status, education_profile, work_profile, total_experience_m, total_experience_y, contact_settings, profile_settings, status, created_at, updated_at', 'required'),
+			//array('id, city_id, state_id, country_id, pincode, marital_status, total_experience_m, total_experience_y, contact_settings, profile_settings, status', 'numerical', 'integerOnly'=>true),
 			//array('username', 'length', 'max'=>15),
 			//array('password', 'length', 'max'=>40),
 			//array('email, first_name, last_name', 'length', 'max'=>100),
@@ -80,7 +94,7 @@ class Candidate extends CActiveRecord
 			//array('gender', 'length', 'max'=>1),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email, first_name, last_name, address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, website, date_of_birth, age, gender, maritial_status, education_profile, work_profile, total_experience_m, total_experience_y, contact_settings, profile_settings, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, username, password, email, first_name, last_name, address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, website, date_of_birth, gender, marital_status, education_profile, work_profile, total_experience_m, total_experience_y, contact_settings, profile_settings, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -116,15 +130,14 @@ class Candidate extends CActiveRecord
 			'pincode' => 'Pincode',
 			'contact_phone' => 'Contact Phone',
 			'contact_mobile' => 'Contact Mobile',
-			'website' => 'Website',
+			'website' => 'Website or Blog',
 			'date_of_birth' => 'Date Of Birth',
-			'age' => 'Age',
 			'gender' => 'Gender',
-			'maritial_status' => 'Maritial Status',
+			'marital_status' => 'Marital Status',
 			'education_profile' => 'Education Profile',
 			'work_profile' => 'Work Profile',
-			'total_experience_m' => 'Total Experience Months',
-			'total_experience_y' => 'Total Experience Years',
+			'total_experience_m' => 'Months',
+			'total_experience_y' => 'Years',
 			'contact_settings' => 'Contact Settings',
 			'profile_settings' => 'Profile Settings',
 			'activation_code' => 'Activation Code',
@@ -162,9 +175,8 @@ class Candidate extends CActiveRecord
 		$criteria->compare('contact_mobile',$this->contact_mobile,true);
 		$criteria->compare('website',$this->website,true);
 		$criteria->compare('date_of_birth',$this->date_of_birth,true);
-		$criteria->compare('age',$this->age);
 		$criteria->compare('gender',$this->gender,true);
-		$criteria->compare('maritial_status',$this->maritial_status);
+		$criteria->compare('marital_status',$this->marital_status);
 		$criteria->compare('education_profile',$this->education_profile,true);
 		$criteria->compare('work_profile',$this->work_profile,true);
 		$criteria->compare('total_experience_m',$this->total_experience_m);
@@ -181,6 +193,9 @@ class Candidate extends CActiveRecord
 		));
 	}
 
+	/**
+	 * Update timestamps before saving candidate information
+	 */
 	public function beforeSave()
 	{
 		if ($this->isNewRecord)
@@ -189,5 +204,102 @@ class Candidate extends CActiveRecord
 			$this->updated_at = new CDbExpression('NOW()');
 
 		return parent::beforeSave();
+	}
+
+	/**
+	 * Return all possible gender list options
+	 * @return array of all possible gender options
+	 */
+	public function getGenderOptions()
+	{
+		return array(1 => 'Male', 2 => 'Female', 3 => 'Undisclosed');
+	}
+
+	/**
+	 * Return the current candidate gender as human readable string
+	 * @return string representation of the gender of current candidate
+	 */
+	public function getGenderText()
+	{
+		switch ($this->gender) {
+			case 1:  return 'Male'; break;
+			case 2:  return 'Female'; break;
+			case 3:  return 'Undisclosed'; break;
+			default: return 'Unknown'; break;
+		}
+	}
+
+	/**
+	 * Return all possible marital status list options
+	 * @return array of all possible marital status options
+	 */
+	public function getMaritalStatusOptions()
+	{
+		return array(1 => 'Single', 2 => 'Married', 3 => 'Separated', 4 => 'Divorced', 5 => 'Widowed', 6 => 'Undisclosed');
+	}
+
+	/**
+	 * Return the current candidate marital status as human readable string
+	 * @return string representation of the marital status of current candidate
+	 */
+	public function getMaritalStatusText()
+	{
+		switch ($this->marital_status) {
+			case 1:  return 'Single'; break;
+			case 2:  return 'Married'; break;
+			case 3:  return 'Separated'; break;
+			case 4:  return 'Divorced'; break;
+			case 5:  return 'Widowed'; break;
+			case 6:  return 'Undisclosed'; break;
+			default: return 'Unknown'; break;
+		}
+	}
+
+	public function getMonthOptions()
+	{
+		return array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+	}
+
+	public function getYearOptions()
+	{
+		return array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+	}
+
+	public function getProfileSettingsOptions()
+	{
+		return array(
+			1 => 'Let everyone see my profile',
+			2 => 'Only registered employers can see my profile',
+			3 => 'Only employers to whom I have applied for job can see my profile',
+		);
+	}
+
+	public function getProfileSettingsText()
+	{
+		switch ($this->profile_settings) {
+			case 1:  return 'Let everyone see my profile'; break;
+			case 2:  return 'Only registered employers can see my profile'; break;
+			case 3:  return 'Only employers to whom I have applied for job can see my profile'; break;
+			default: return 'Unknown'; break;
+		}
+	}
+
+	public function getContactSettingsOptions()
+	{
+		return array(
+			1 => 'Let everyone see my contact details',
+			2 => 'Only registered employers can see my contact details',
+			3 => 'Only employers to whom I have applied for job can see my contact details',
+		);
+	}
+
+	public function getContactSettingsText()
+	{
+		switch ($this->contact_settings) {
+			case 1:  return 'Let everyone see my contact details'; break;
+			case 2:  return 'Only registered employers can see my contact details'; break;
+			case 3:  return 'Only employers to whom I have applied for job can see my contact details'; break;
+			default: return 'Unknown'; break;
+		}
 	}
 }
