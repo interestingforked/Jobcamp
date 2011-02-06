@@ -18,11 +18,11 @@
 	</div><!-- header -->
 
 	<div id="navigation">
-		<span class="name">Profile</span>
+		<span class="name">About</span>
 		<span class="pipe">|</span>
-		<span class="name">Signout</span>
+		<span class="name">Contact</span>
 		<span class="pipe">|</span>
-		<span class="name">Help</span>
+		<span class="name">Disclaimer</span>
 	</div><!-- navigation -->
 
 	<div id="top-menu">
