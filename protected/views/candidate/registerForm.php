@@ -1,5 +1,6 @@
 <?php
 	$form_structure = array(
+		'showErrorSummary' => TRUE,
 		'elements' => array(
 			'username' => array(
 				'type' => 'text',

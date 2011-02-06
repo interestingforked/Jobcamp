@@ -75,6 +75,8 @@ class Candidate extends CActiveRecord
 
 			array('first_name, last_name', 'required', 'on' => 'edit'),
 			array('address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, education_profile, work_profile', 'safe', 'on' => 'edit'),
+			array('pincode', 'numerical', 'on' => 'edit'),
+			array('pincode', 'length', 'min' => 4, 'on' => 'edit'),
 			array('website', 'url', 'on' => 'edit'),
 			array('date_of_birth', 'type', 'type' => 'date', 'dateFormat' => 'yyyy-mm-dd', 'on' => 'edit'),
 			array('total_experience_m', 'in', 'range' => $this->getMonthOptions(), 'on' => 'edit'),

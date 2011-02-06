@@ -32,18 +32,18 @@
 </tr>
 
 <tr>
-<td class="align-right">City:</td>
-<td><?php echo CHtml::encode($candidate->city_id); ?></td>
+<td class="align-right">Country:</td>
+<td><?php echo CHtml::encode(Country::model()->getName($candidate->country_id)); ?></td>
 </tr>
 
 <tr>
 <td class="align-right">State:</td>
-<td><?php echo CHtml::encode($candidate->state_id); ?></td>
+<td><?php echo CHtml::encode(State::model()->getName($candidate->state_id)); ?></td>
 </tr>
 
 <tr>
-<td class="align-right">Country:</td>
-<td><?php echo CHtml::encode($candidate->country_id); ?></td>
+<td class="align-right">City:</td>
+<td><?php echo CHtml::encode(City::model()->getName($candidate->city_id)); ?></td>
 </tr>
 
 <tr>

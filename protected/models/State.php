@@ -92,4 +92,32 @@ class State extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	/**
+	 * Retrive list of all values for display in dropdownlist
+	 * @return array of id and values
+	 */
+	function getAll()
+	{
+		$list_data = array();
+		$list_query = $this->findAll();
+		foreach ($list_query as $row)
+		{
+			$list_data[$row->id] = $row->name;
+		}
+		return $list_data;
+	}
+
+	/**
+	 * Retrive the name of the id specified
+	 * @return string name if found or empty string if not found
+	 */
+	function getName($item_id)
+	{
+		$item_data = $this->findByPk($item_id);
+		if ($item_data)
+			return $item_data->name;
+		else
+			return '';
+	}
 }

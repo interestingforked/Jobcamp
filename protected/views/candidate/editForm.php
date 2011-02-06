@@ -1,5 +1,6 @@
 <?php
 	$form_structure = array(
+		'showErrorSummary' => TRUE,
 		'elements' => array(
 			'first_name' => array(
 				'type' => 'text',
@@ -17,17 +18,20 @@
 				'type' => 'text',
 				'maxlength' => 255,
 			),
-			'city_id' => array(
-				'type' => 'text',
+			'country_id' => array(
+				'type' => 'dropdownlist',
 				'maxlength' => 15,
+				'items' => Country::model()->getAll(),
 			),
 			'state_id' => array(
-				'type' => 'text',
+				'type' => 'dropdownlist',
 				'maxlength' => 15,
+				'items' => State::model()->getAll(),
 			),
-			'country_id' => array(
-				'type' => 'text',
+			'city_id' => array(
+				'type' => 'dropdownlist',
 				'maxlength' => 15,
+				'items' => City::model()->getAll(),
 			),
 			'pincode' => array(
 				'type' => 'text',
@@ -46,8 +50,12 @@
 				'maxlength' => 255,
 			),
 			'date_of_birth' => array(
-				'type' => 'text',
-				'maxlength' => 10,
+				'type' => 'zii.widgets.jui.CJuiDatePicker',
+				'options' => array(
+					'dateFormat'=>'yy-mm-dd',
+					'changeMonth' => true,
+					'changeYear' => true,
+				),
 			),
 			'gender' => array(
 				'type' => 'dropdownlist',
