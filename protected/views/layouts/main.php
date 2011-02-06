@@ -33,8 +33,6 @@
 				array('label' => 'Login', 'url' => array('/candidate/login'), 'visible' => Yii::app()->user->isGuest),
 				array('label' => 'My Profile', 'url' => array('/candidate/profile'), 'visible' => !Yii::app()->user->isGuest),
 				array('label' => 'Logout', 'url' => array('/candidate/logout'), 'visible' => !Yii::app()->user->isGuest),
-				array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-				array('label' => 'Contact', 'url' => array('/site/contact')),
 			),
 		)); ?>
 	</div><!-- top-menu -->
