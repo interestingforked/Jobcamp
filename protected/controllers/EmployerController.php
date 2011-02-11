@@ -4,11 +4,13 @@ class EmployerController extends Controller
 {
 	public function actionIndex()
 	{
+		$this->layout = "employer";
 		$this->render('index');
 	}
 
 	public function actionRegister()
 	{
+		$this->layout = "employer";
 		$model = new Employer;
 		$model->setScenario('register');
 		$form = new CForm('application.views.employer.registerForm', $model);
@@ -21,7 +23,7 @@ class EmployerController extends Controller
 			$model->activation_code = md5(mt_rand());
 			if ($model->save()) {
 				Yii::app()->user->setFlash('success', 'Your account has been created. Please check your email for activation details.');
-				$this->redirect(array('site/index'));
+				$this->redirect(array('employer/index'));
 				return;
 			} else {
 				Yii::app()->user->setFlash('error', 'There was an error creating your account. Please try again.');
@@ -36,6 +38,7 @@ class EmployerController extends Controller
 
 	public function actionLogin()
 	{
+		$this->layout = "employer";
 		$model = new Employer;
 		$model->setScenario('login');
 		$form = new CForm('application.views.employer.loginForm', $model);
@@ -67,12 +70,14 @@ class EmployerController extends Controller
 
 	public function actionProfile()
 	{
+		$this->layout = "employer";
 		$model = Employer::model()->findByPk(Yii::app()->user->id);
 		$this->render('profile', array('employer' => $model));
 	}
 
 	public function actionEdit()
 	{
+		$this->layout = "employer";
 		$model = Employer::model()->findByPk(Yii::app()->user->id);
 		$model->setScenario('edit');
 		$form = new CForm('application.views.employer.editForm', $model);

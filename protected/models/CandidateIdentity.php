@@ -12,6 +12,8 @@ class CandidateIdentity extends CUserIdentity
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		} else {
 			$this->_id = $record->id;
+			$this->setState('isCandidate', TRUE);
+			$this->setState('isEmployer', FALSE);
 			$this->errorCode = self::ERROR_NONE;
 		}
 		return !$this->errorCode;

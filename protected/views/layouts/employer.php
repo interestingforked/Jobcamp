@@ -14,7 +14,7 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="sitename"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="sitename"><?php echo CHtml::encode(Yii::app()->name); ?> - Employer</div>
 	</div><!-- header -->
 
 	<div id="navigation">
@@ -22,14 +22,14 @@
 		<span class="name"><?php print CHtml::link('Employer', array('employer/index')); ?></span>
 	</div><!-- navigation -->
 
-	<div id="top-menu">
+	<div id="top-menu-employer">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items' => array(
-				array('label' => 'Home', 'url' => array('/site/index')),
-				array('label' => 'Register', 'url' => array('/candidate/register'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'Login', 'url' => array('/candidate/login'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'My Profile', 'url' => array('/candidate/profile'), 'visible' => !Yii::app()->user->isGuest),
-				array('label' => 'Logout', 'url' => array('/candidate/logout'), 'visible' => !Yii::app()->user->isGuest),
+				array('label' => 'Home', 'url' => array('/employer/index')),
+				array('label' => 'Register', 'url' => array('/employer/register'), 'visible' => Yii::app()->user->isGuest),
+				array('label' => 'Login', 'url' => array('/employer/login'), 'visible' => Yii::app()->user->isGuest),
+				array('label' => 'My Profile', 'url' => array('/employer/profile'), 'visible' => !Yii::app()->user->isGuest),
+				array('label' => 'Logout', 'url' => array('/employer/logout'), 'visible' => !Yii::app()->user->isGuest),
 			),
 		)); ?>
 	</div><!-- top-menu -->
