@@ -74,10 +74,12 @@ class Employer extends CActiveRecord
 			array('username, password', 'required', 'on' => 'login'),
 
 			array('company_name', 'required', 'on' => 'edit'),
-			array('address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, company_profile', 'safe', 'on' => 'edit'),
+			array('address1, address2, city_id, state_id, country_id, pincode, contact_phone, contact_mobile, total_tunover, company_profile', 'safe', 'on' => 'edit'),
 			array('pincode', 'numerical', 'on' => 'edit'),
 			array('pincode', 'length', 'min' => 4, 'on' => 'edit'),
 			array('website', 'url', 'on' => 'edit'),
+			array('number_of_employees', 'numerical', 'on' => 'edit'),
+			array('sector', 'in', 'range' => array_keys($this->getSectorOptions()), 'on' => 'edit'),
 			array('profile_settings', 'in', 'range' => array_keys($this->getProfileSettingsOptions()), 'on' => 'edit'),
 			array('contact_settings', 'in', 'range' => array_keys($this->getContactSettingsOptions()), 'on' => 'edit'),
 

@@ -47,7 +47,7 @@ class EmployerController extends Controller
 			if ($identity->authenticate()) {
 				Yii::app()->user->setFlash('success', 'Login successful.');
 				Yii::app()->user->login($identity);
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect(array('employer/index'));
 				return;
 			} else {
 				Yii::app()->user->setFlash('error', 'Login failed. Please try again.');
@@ -72,7 +72,7 @@ class EmployerController extends Controller
 	{
 		$this->layout = "employer";
 		$model = Employer::model()->findByPk(Yii::app()->user->id);
-		$this->render('profile', array('employer' => $model));
+		$this->render('profile', array('model' => $model));
 	}
 
 	public function actionEdit()
