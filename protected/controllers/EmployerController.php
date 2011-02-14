@@ -20,6 +20,7 @@ class EmployerController extends Controller
 			$model->password_hash = md5($model->password);
 			$model->email = $_POST['Employer']['email'];
 			$model->status = 0;
+			$mode->scheme_id = 0;
 			$model->activation_code = md5(mt_rand());
 			if ($model->save()) {
 				Yii::app()->user->setFlash('success', 'Your account has been created. Please check your email for activation details.');
