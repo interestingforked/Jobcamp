@@ -2,9 +2,17 @@
 
 class SiteController extends Controller
 {
+	public $layout = '/layouts/candidate';
+
 	public function actionIndex()
 	{
 		$this->render('index');
+	}
+
+	public function actionadmin()
+	{
+		$this->layout = 'admin';
+		$this->render('admin');
 	}
 
 	/**

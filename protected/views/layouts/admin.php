@@ -14,7 +14,7 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="sitename"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="sitename"><?php echo CHtml::encode(Yii::app()->name); ?> - Admin</div>
 	</div><!-- header -->
 
 	<div id="navigation">
@@ -23,14 +23,17 @@
 		<span class="name"><?php print CHtml::link('Admin', array('/site/admin')); ?></span>
 	</div><!-- navigation -->
 
-	<div id="top-menu">
+	<div id="top-menu-admin">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items' => array(
-				array('label' => 'Home', 'url' => array('/site/index')),
-				array('label' => 'Register', 'url' => array('/candidate/register'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'Login', 'url' => array('/candidate/login'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'My Profile', 'url' => array('/candidate/profile'), 'visible' => !Yii::app()->user->isGuest),
-				array('label' => 'Logout', 'url' => array('/candidate/logout'), 'visible' => !Yii::app()->user->isGuest),
+				array('label' => 'Home', 'url' => array('/site/admin')),
+				array('label' => 'Country', 'url' => array('/country')),
+				array('label' => 'State', 'url' => array('/state')),
+				array('label' => 'City', 'url' => array('/city')),
+				array('label' => 'Scheme', 'url' => array('/scheme')),
+				array('label' => 'Job Type', 'url' => array('/JobType')),
+				array('label' => 'Main Category', 'url' => array('/JobMainCategory')),
+				array('label' => 'Sub Category', 'url' => array('/JobSubCategory')),
 			),
 		)); ?>
 	</div><!-- top-menu -->

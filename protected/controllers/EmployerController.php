@@ -2,15 +2,15 @@
 
 class EmployerController extends Controller
 {
+	public $layout = '/layouts/employer';
+
 	public function actionIndex()
 	{
-		$this->layout = "employer";
 		$this->render('index');
 	}
 
 	public function actionRegister()
 	{
-		$this->layout = "employer";
 		$model = new Employer;
 		$model->setScenario('register');
 		$form = new CForm('application.views.employer.registerForm', $model);
@@ -39,7 +39,6 @@ class EmployerController extends Controller
 
 	public function actionLogin()
 	{
-		$this->layout = "employer";
 		$model = new Employer;
 		$model->setScenario('login');
 		$form = new CForm('application.views.employer.loginForm', $model);
@@ -71,14 +70,12 @@ class EmployerController extends Controller
 
 	public function actionProfile()
 	{
-		$this->layout = "employer";
 		$model = Employer::model()->findByPk(Yii::app()->user->id);
 		$this->render('profile', array('model' => $model));
 	}
 
 	public function actionEdit()
 	{
-		$this->layout = "employer";
 		$model = Employer::model()->findByPk(Yii::app()->user->id);
 		$model->setScenario('edit');
 		$form = new CForm('application.views.employer.editForm', $model);

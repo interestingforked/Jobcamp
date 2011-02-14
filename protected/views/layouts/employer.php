@@ -19,7 +19,8 @@
 
 	<div id="navigation">
 		<span class="name"><?php print CHtml::link('Candidate', array('/site/index')); ?></span> |
-		<span class="name"><?php print CHtml::link('Employer', array('employer/index')); ?></span>
+		<span class="name"><?php print CHtml::link('Employer', array('/employer/index')); ?></span> | 
+		<span class="name"><?php print CHtml::link('Admin', array('/site/admin')); ?></span>
 	</div><!-- navigation -->
 
 	<div id="top-menu-employer">

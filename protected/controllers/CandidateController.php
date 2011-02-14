@@ -2,6 +2,8 @@
 
 class CandidateController extends Controller
 {
+	public $layout = '/layouts/candidate';
+
 	public function actionIndex()
 	{
 		$this->render('index');
