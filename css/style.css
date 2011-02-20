@@ -73,6 +73,30 @@ body {
 	color: #000000;
 }
 
+#top-menu-admin {
+	background: none repeat scroll 0 0 #F87217;
+	height:35px;
+}
+
+#top-menu-admin ul {
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+
+#top-menu-admin ul li {
+	font-size:14px;
+	background: none repeat scroll 0 0 #F87217;
+	padding: 8px 10px 8px 10px;
+	float:left;
+	border-right: 1px solid #999999;
+}
+
+#top-menu-admin ul li a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
 table {
 	border-collapse:collapse;
 }
