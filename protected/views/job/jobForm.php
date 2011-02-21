@@ -45,11 +45,6 @@
 				'maxlength' => 15,
 				'items' => JobSubCategory::model()->getAll(),
 			),
-			'scheme_id' => array(
-				'type' => 'dropdownlist',
-				'maxlength' => 15,
-				'items' => Scheme::model()->getAll(),
-			),
 			'expected_salary' => array(
 				'type' => 'text',
 				'maxlength' => 15,
@@ -74,7 +69,6 @@
 					'changeYear' => true,
 				),
 			),
-			'Minimum Experience',
 			'min_experience_y' => array(
 				'type' => 'dropdownlist',
 				'items'=> Job::model()->getYearOptions(),
@@ -85,6 +79,11 @@
 			),
 			'apply_inline' => array(
 				'type' => 'checkbox',
+			),
+			'listing' => array(
+				'type' => 'dropdownlist',
+				'maxlength' => 15,
+				'items' => Job::model()->getListingOptions(),
 			),
 		),
 		'buttons' => array(

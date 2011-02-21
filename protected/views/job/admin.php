@@ -47,9 +47,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'job_type_id',
 		'job_main_category_id',
 		'job_sub_category_id',
-		'scheme_id',
-		/*
 		'country_id',
+		/*
 		'state_id',
 		'city_id',
 		'city_others',
@@ -65,6 +64,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'view_count',
 		'start_date',
 		'end_date',
+		'listing',
 		'created_at',
 		'updated_at',
 		*/

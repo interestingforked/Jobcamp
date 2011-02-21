@@ -10,7 +10,6 @@ class m110220_160053_create_job_table extends CDbMigration
 			'job_type_id' => 'int(11) NOT NULL',
 			'job_main_category_id' => 'int(11) NOT NULL',
 			'job_sub_category_id' => 'int(11) NOT NULL',
-			'scheme_id' => 'int(11) NOT NULL',
 			'country_id' => 'int(11) NOT NULL',
 			'state_id' => 'int(11) NOT NULL',
 			'city_id' => 'int(11) NOT NULL',
@@ -27,6 +26,7 @@ class m110220_160053_create_job_table extends CDbMigration
 			'view_count' => 'int(11) NOT NULL DEFAULT 0',
 			'start_date' => 'datetime NOT NULL',
 			'end_date' => 'datetime NOT NULL',
+			'listing' => 'int(1) NOT NULL',
 			'created_at' => 'datetime NOT NULL',
 			'updated_at' => 'datetime NOT NULL',
 		));

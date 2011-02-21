@@ -31,11 +31,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'scheme_id'); ?>
-		<?php echo $form->textField($model,'scheme_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'country_id'); ?>
 		<?php echo $form->textField($model,'country_id'); ?>
 	</div>
@@ -113,6 +108,11 @@
 	<div class="row">
 		<?php echo $form->label($model,'end_date'); ?>
 		<?php echo $form->textField($model,'end_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'listing'); ?>
+		<?php echo $form->textField($model,'listing'); ?>
 	</div>
 
 	<div class="row">

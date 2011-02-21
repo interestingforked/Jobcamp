@@ -9,7 +9,6 @@
  * @property integer $job_type_id
  * @property integer $job_main_category_id
  * @property integer $job_sub_category_id
- * @property integer $scheme_id
  * @property integer $country_id
  * @property integer $state_id
  * @property integer $city_id
@@ -26,6 +25,7 @@
  * @property integer $view_count
  * @property string $start_date
  * @property string $end_date
+ * @property integer $listing
  * @property string $created_at
  * @property string $updated_at
  *
@@ -62,16 +62,19 @@ class Job extends CActiveRecord
 			array('title, description', 'required'),
 			array('min_experience_m, min_experience_y, expected_salary, notice_period, apply_inline, start_date, end_date', 'safe', 'on' => 'create'),
 			array('country_id, state_id, city_id, job_type_id, job_main_category_id, job_sub_category_id, scheme_id', 'numerical', 'on' => 'create'),
-			//array('employer_id, job_type_id, job_main_category_id, job_sub_category_id, scheme_id, country_id, state_id, city_id, city_others, title, description, clean_url, min_experience_m, min_experience_y, notice_period, apply_inline, start_date, end_date, created_at, updated_at', 'required'),
-			//array('employer_id, job_type_id, job_main_category_id, job_sub_category_id, scheme_id, country_id, state_id, city_id, min_experience_m, min_experience_y, notice_period, apply_inline, status, view_count', 'numerical', 'integerOnly'=>true),
-			//array('city_others', 'length', 'max'=>20),
 			array('min_experience_m', 'in', 'range' => $this->getMonthOptions(), 'on' => 'create'),
 			array('min_experience_y', 'in', 'range' => $this->getyearOptions(), 'on' => 'create'),
+			array('listing', 'in', 'range' => array_keys($this->getListingOptions()), 'on' => 'create'),
+			array('title, clean_url', 'length', 'max' => 255),
+			array('expected_salary', 'length', 'max' => 15),
+			//array('employer_id, job_type_id, job_main_category_id, job_sub_category_id, country_id, state_id, city_id, city_others, title, description, clean_url, min_experience_m, min_experience_y, notice_period, apply_inline, start_date, end_date, listing, created_at, updated_at', 'required'),
+			//array('employer_id, job_type_id, job_main_category_id, job_sub_category_id, country_id, state_id, city_id, min_experience_m, min_experience_y, notice_period, apply_inline, status, view_count, listing', 'numerical', 'integerOnly'=>true),
+			array('city_others', 'length', 'max' => 20),
 			array('title, clean_url', 'length', 'max' => 255),
 			array('expected_salary', 'length', 'max' => 15),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, employer_id, job_type_id, job_main_category_id, job_sub_category_id, scheme_id, country_id, state_id, city_id, city_others, title, description, clean_url, min_experience_m, min_experience_y, expected_salary, notice_period, apply_inline, status, view_count, start_date, end_date, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, employer_id, job_type_id, job_main_category_id, job_sub_category_id, country_id, state_id, city_id, city_others, title, description, clean_url, min_experience_m, min_experience_y, expected_salary, notice_period, apply_inline, status, view_count, start_date, end_date, listing, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -98,7 +101,6 @@ class Job extends CActiveRecord
 			'job_type_id' => 'Job Type',
 			'job_main_category_id' => 'Job Main Category',
 			'job_sub_category_id' => 'Job Sub Category',
-			'scheme_id' => 'Scheme',
 			'country_id' => 'Country',
 			'state_id' => 'State',
 			'city_id' => 'City',
@@ -106,8 +108,8 @@ class Job extends CActiveRecord
 			'title' => 'Title',
 			'description' => 'Description',
 			'clean_url' => 'Clean Url',
-			'min_experience_m' => 'Min Experience M',
-			'min_experience_y' => 'Min Experience Y',
+			'min_experience_m' => 'Min Experience Months',
+			'min_experience_y' => 'Min Experience Years',
 			'expected_salary' => 'Expected Salary',
 			'notice_period' => 'Notice Period',
 			'apply_inline' => 'Apply Inline',
@@ -115,6 +117,7 @@ class Job extends CActiveRecord
 			'view_count' => 'View Count',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
+			'listing' => 'Listing',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -143,6 +146,25 @@ class Job extends CActiveRecord
 		return array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
 	}
 
+	public function getListingOptions()
+	{
+		return array(
+			1 => 'Free Listing',
+			2 => 'Paid Listing',
+			3 => 'Special Listing',
+		);
+	}
+
+	public function getListingText()
+	{
+		switch ($this->contact_settings) {
+			case 1: return 'Free Listing'; break;
+			case 2: return 'Paid Listing'; break;
+			case 3: return 'Special Listing'; break;
+			default: return 'Unknown'; break;
+		}
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
@@ -159,7 +181,6 @@ class Job extends CActiveRecord
 		$criteria->compare('job_type_id',$this->job_type_id);
 		$criteria->compare('job_main_category_id',$this->job_main_category_id);
 		$criteria->compare('job_sub_category_id',$this->job_sub_category_id);
-		$criteria->compare('scheme_id',$this->scheme_id);
 		$criteria->compare('country_id',$this->country_id);
 		$criteria->compare('state_id',$this->state_id);
 		$criteria->compare('city_id',$this->city_id);
@@ -176,6 +197,7 @@ class Job extends CActiveRecord
 		$criteria->compare('view_count',$this->view_count);
 		$criteria->compare('start_date',$this->start_date,true);
 		$criteria->compare('end_date',$this->end_date,true);
+		$criteria->compare('listing',$this->listing);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

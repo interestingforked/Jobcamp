@@ -20,19 +20,15 @@
 	<?php echo CHtml::encode($data->job_sub_category_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('scheme_id')); ?>:</b>
-	<?php echo CHtml::encode($data->scheme_id); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('country_id')); ?>:</b>
 	<?php echo CHtml::encode($data->country_id); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('state_id')); ?>:</b>
 	<?php echo CHtml::encode($data->state_id); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('city_id')); ?>:</b>
 	<?php echo CHtml::encode($data->city_id); ?>
 	<br />
@@ -87,6 +83,10 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('end_date')); ?>:</b>
 	<?php echo CHtml::encode($data->end_date); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('listing')); ?>:</b>
+	<?php echo CHtml::encode($data->listing); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created_at')); ?>:</b>
