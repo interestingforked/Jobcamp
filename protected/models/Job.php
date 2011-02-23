@@ -61,7 +61,7 @@ class Job extends CActiveRecord
 		return array(
 			array('title, description', 'required'),
 			array('min_experience_m, min_experience_y, expected_salary, notice_period, apply_inline, start_date, end_date', 'safe', 'on' => 'create'),
-			array('country_id, state_id, city_id, job_type_id, job_main_category_id, job_sub_category_id, scheme_id', 'numerical', 'on' => 'create'),
+			array('country_id, state_id, city_id, job_type_id, job_main_category_id, job_sub_category_id', 'numerical', 'on' => 'create'),
 			array('min_experience_m', 'in', 'range' => $this->getMonthOptions(), 'on' => 'create'),
 			array('min_experience_y', 'in', 'range' => $this->getyearOptions(), 'on' => 'create'),
 			array('listing', 'in', 'range' => array_keys($this->getListingOptions()), 'on' => 'create'),
